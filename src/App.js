@@ -6,7 +6,7 @@ import { Card } from "antd";
 function App() {
   return (
     <div className="App">
-      <Card style={{ display: "grid", placeItems: "center" }}>
+      <Card className="card">
         <EnterBeatdown />
         <BeatdownTable />
       </Card>

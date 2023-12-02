@@ -1,83 +1,89 @@
 import classes from "./Form.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Select from "react-select";
+import { aoList } from "../../resources/aoList";
 
 export const Form = (props) => {
-  const initialInput = {
-    "beatdown-date": "",
-    "ao-location": "",
-    "q-option": "",
-  };
+  const [date, setDate] = useState("");
+  const [dayOfWeek, setDayOfWeek] = useState("");
+  const [ledWorkout, setLedWorkout] = useState("no");
+  const [selectedAo, setSelectedAo] = useState(null);
+  const dateInputRef = useRef(null);
+  const [beatdownCount, setBeatdownCount] = useState(0);
 
-  const [userInput, setUserInput] = useState(initialInput);
-
-  const aoList = [
-    { value: 7, label: "Rubicon", key: "option1" },
-    { value: 8, label: "Badapple", key: "option1" },
-    { value: 9, label: "Windjammer", key: "option1" },
-    { value: 10, label: "Crossroads", key: "option1" },
-    { value: 7, label: "Rubicon", key: "option1" },
-    { value: 8, label: "Badapple", key: "option1" },
-    { value: 9, label: "Windjammer", key: "option1" },
-    { value: 10, label: "Crossroads", key: "option1" },
-    { value: 7, label: "Rubicon", key: "option1" },
-    { value: 8, label: "Badapple", key: "option1" },
-    { value: 9, label: "Windjammer", key: "option1" },
-    { value: 10, label: "Crossroads", key: "option1" },
-    { value: 7, label: "Rubicon", key: "option1" },
-    { value: 8, label: "Badapple", key: "option1" },
-    { value: 9, label: "Windjammer", key: "option1" },
-    { value: 10, label: "Crossroads", key: "option1" },
-  ];
-
-  const handleReset = () => {
-    setUserInput(initialInput);
-  };
-
-  const handleFormChange = (input, value) => {
-    setUserInput((prevInput) => {
-      return {
-        ...prevInput,
-        [input]: +value,
-      };
-    });
+  let beatdown = {
+    day: dayOfWeek,
+    date: date,
+    location: selectedAo,
+    ledWorkout: ledWorkout,
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onCalculate(userInput);
+    props.onAddBeatdown(beatdown);
+    setBeatdownCount(beatdownCount + 1);
+  };
+
+  console.log(beatdownCount);
+
+  const handleReset = () => {
+    setSelectedAo(null);
+    setLedWorkout("no");
+    setDate("");
+  };
+
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
+    const dateObject = new Date(e.target.value);
+    const dayOfWeek = dateObject.getDay();
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    setDayOfWeek(daysOfWeek[dayOfWeek]);
+  };
+
+  const handleSelectChange = (e) => {
+    setLedWorkout(e.target.value);
+  };
+
+  const handleAoChange = (selectedAo) => {
+    setSelectedAo(selectedAo);
   };
 
   return (
     <div>
       <form className={classes.form}>
         <div className={classes["input-group"]}>
-          <p>
+          <div>
             <label htmlFor="beatdown-date">Beatdown Date</label>
             <input
               type="date"
               id="beatdown-date"
               name="beatdown-date"
-              value={userInput["beatdown-date"]}
-              onChange={(event) =>
-                handleFormChange("beatdown-date", event.target.value)
-              }
+              ref={dateInputRef}
+              onChange={handleDateChange}
             />
-          </p>
-          <p>
+          </div>
+          <div>
             <label htmlFor="ao-location">AO Location</label>
             <Select
               closeMenuOnSelect={true}
               id="ao-location"
               name="ao-location"
-              onChange={(event) =>
-                handleFormChange("ao-location", event.target.value)
-              }
               isClearable
               isDisabled=""
               options={aoList}
+              onChange={handleAoChange}
+              // key={`${selected}`}
+              value={selectedAo || ""}
             />
-          </p>
+          </div>
         </div>
         <div className={classes["input-group"]}>
           <div>
@@ -85,32 +91,28 @@ export const Form = (props) => {
             <div className="">
               <label>
                 <input
-                  onChange={(event) =>
-                    handleFormChange("q-option", event.target.value)
-                  }
+                  onChange={handleSelectChange}
                   type="radio"
                   name="yes"
-                  value="q-option"
-                  checked=""
+                  value="yes"
+                  checked={ledWorkout === "yes"}
                 />
                 Yes
               </label>
               <label>
                 <input
-                  onChange={(event) =>
-                    handleFormChange("q-option", event.target.value)
-                  }
+                  onChange={handleSelectChange}
                   type="radio"
                   name="no"
-                  value="ao"
-                  checked=""
+                  value="no"
+                  checked={ledWorkout === "no"}
                 />
                 No
               </label>
             </div>
           </div>
         </div>
-        <p className={classes.actions}>
+        <div className={classes.actions}>
           <button
             type="reset"
             className={classes.buttonAlt}
@@ -125,7 +127,7 @@ export const Form = (props) => {
           >
             Add Beatdown
           </button>
-        </p>
+        </div>
       </form>
     </div>
   );

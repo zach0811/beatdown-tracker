@@ -1,0 +1,18 @@
+export const aoList = [
+  { value: 1, label: "Rubicon", key: "option1" },
+  { value: 2, label: "Badapple", key: "option1" },
+  { value: 3, label: "Windjammer", key: "option1" },
+  { value: 4, label: "Crossroads", key: "option1" },
+  { value: 5, label: "Rubicon", key: "option1" },
+  { value: 6, label: "Badapple", key: "option1" },
+  { value: 7, label: "Windjammer", key: "option1" },
+  { value: 8, label: "Crossroads", key: "option1" },
+  { value: 9, label: "Rubicon", key: "option1" },
+  { value: 10, label: "Badapple", key: "option1" },
+  { value: 11, label: "Windjammer", key: "option1" },
+  { value: 12, label: "Crossroads", key: "option1" },
+  { value: 13, label: "Rubicon", key: "option1" },
+  { value: 14, label: "Badapple", key: "option1" },
+  { value: 15, label: "Windjammer", key: "option1" },
+  { value: 16, label: "Crossroads", key: "option1" },
+];

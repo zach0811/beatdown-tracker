@@ -6,30 +6,19 @@ export const Table = (props) => {
       <table className={classes.result}>
         <thead>
           <tr>
+            <th>Day</th>
             <th>Date</th>
             <th>AO Location</th>
             <th>Q: Y/N</th>
           </tr>
         </thead>
         <tbody>
-          {props.data.map((yearData) => (
-            <tr key={yearData.year}>
-              <td>{yearData.year}</td>
-              {/* <td>{formatter.format(yearData.savingsEndOfYear)}</td>
-              <td>{formatter.format(yearData.yearlyInterest)}</td>
-              <td>
-                {formatter.format(
-                  yearData.savingsEndOfYear -
-                    props.initialInvestment -
-                    yearData.yearlyContribution * yearData.year
-                )}
-              </td>
-              <td>
-                {formatter.format(
-                  props.initialInvestment +
-                    yearData.yearlyContribution * yearData.year
-                )}
-              </td> */}
+          {props.data.map((beatdown, index) => (
+            <tr key={index}>
+              <td>{beatdown.day}</td>
+              <td>{beatdown.date}</td>
+              <td>{beatdown.location.label}</td>
+              <td>{beatdown.ledWorkout.charAt(0).toUpperCase()}</td>
             </tr>
           ))}
         </tbody>

@@ -6,23 +6,35 @@ import { Totals } from "../Totals/Totals";
 
 export const Page = () => {
   const [beatdowns, setBeatdowns] = useState([]);
-  const [beatdownCount, setBeatdownCount] = useState();
+  const [beatdownTotal, setBeatdownTotal] = useState();
 
-  const handleAddBeatdownCount = () => {
-    setBeatdownCount(beatdownCount);
+  const handleAddBeatdownCount = (beatDownCount) => {
+    setBeatdownTotal(beatDownCount);
+    console.log("page count", beatdownTotal);
   };
 
   const handleAddBeatdown = (beatdown) => {
     setBeatdowns((prevBeatdowns) => [...prevBeatdowns, beatdown]);
   };
 
+  const handleDeleteBeatdown = (index) => {
+    const newBeatdowns = [...beatdowns];
+    newBeatdowns.splice(index, 1);
+    setBeatdowns(newBeatdowns);
+  };
+
   return (
     <>
       <Header />
-      <Form onAddBeatdown={handleAddBeatdown} />
+      <Form
+        onAddBeatdown={handleAddBeatdown}
+        onAddBeatdownCount={handleAddBeatdownCount}
+      />
       {!beatdowns && <h1 style={{ textAlign: "center" }}>No data to show!</h1>}
-      {beatdowns && <Table data={beatdowns} />}
-      <Totals onAddBeatdownCount={beatdownCount} />
+      {beatdowns && (
+        <Table data={beatdowns} onDeleteBeatdown={handleDeleteBeatdown} />
+      )}
+      <Totals totals={beatdownTotal} />
     </>
   );
 };

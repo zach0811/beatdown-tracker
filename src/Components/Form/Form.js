@@ -1,5 +1,5 @@
 import classes from "./Form.module.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Select from "react-select";
 import { aoList } from "../../resources/aoList";
 
@@ -10,6 +10,10 @@ export const Form = (props) => {
   const [selectedAo, setSelectedAo] = useState(null);
   const dateInputRef = useRef(null);
   const [beatdownCount, setBeatdownCount] = useState(0);
+  const [formError, setFormError] = useState({
+    dateError: "",
+    aoError: "",
+  });
 
   let beatdown = {
     day: dayOfWeek,
@@ -18,13 +22,20 @@ export const Form = (props) => {
     ledWorkout: ledWorkout,
   };
 
+  useEffect(() => {
+    console.log("error", formError);
+  }, [formError]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onAddBeatdown(beatdown);
-    setBeatdownCount(beatdownCount + 1);
+    if (formError.dateError !== "" && !formError.aoError !== "") {
+      props.onAddBeatdown(beatdown);
+      setBeatdownCount(beatdownCount + 1);
+      props.onAddBeatdownCount(beatdownCount);
+    } else {
+      handleFormErrors();
+    }
   };
-
-  console.log(beatdownCount);
 
   const handleReset = () => {
     setSelectedAo(null);
@@ -46,14 +57,37 @@ export const Form = (props) => {
       "Saturday",
     ];
     setDayOfWeek(daysOfWeek[dayOfWeek]);
+    setFormError((prevErrors) => ({
+      ...prevErrors,
+      dateError: "",
+    }));
   };
 
-  const handleSelectChange = (e) => {
-    setLedWorkout(e.target.value);
+  const handleSelectChange = (selectedOption) => {
+    setLedWorkout(selectedOption ? selectedOption.value : "");
   };
 
   const handleAoChange = (selectedAo) => {
     setSelectedAo(selectedAo);
+    setFormError((prevErrors) => ({
+      ...prevErrors,
+      aoError: "",
+    }));
+  };
+
+  const handleFormErrors = () => {
+    if (!date) {
+      setFormError((prevErrors) => ({
+        ...prevErrors,
+        dateError: "Please enter a date",
+      }));
+    }
+    if (!selectedAo) {
+      setFormError((prevErrors) => ({
+        ...prevErrors,
+        aoError: "Please select an AO",
+      }));
+    }
   };
 
   return (
@@ -69,6 +103,9 @@ export const Form = (props) => {
               ref={dateInputRef}
               onChange={handleDateChange}
             />
+            {formError.dateError !== "" && (
+              <div className="error-message">{formError.dateError}</div>
+            )}
           </div>
           <div>
             <label htmlFor="ao-location">AO Location</label>
@@ -83,6 +120,9 @@ export const Form = (props) => {
               // key={`${selected}`}
               value={selectedAo || ""}
             />
+            {formError.aoError !== "" && (
+              <div className="error-message">{formError.aoError}</div>
+            )}
           </div>
         </div>
         <div className={classes["input-group"]}>
@@ -124,10 +164,12 @@ export const Form = (props) => {
             type="submit"
             className={classes.button}
             onClick={handleSubmit}
+            // disabled={isFormComplete()}
           >
             Add Beatdown
           </button>
         </div>
+        {formError ? <div className="error-message">Error</div> : ""}
       </form>
     </div>
   );

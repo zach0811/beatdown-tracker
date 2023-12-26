@@ -63,3 +63,6 @@
     background: transparent;
     color: #91e1d0;
   }
+.error-message {
+  color: red
+}

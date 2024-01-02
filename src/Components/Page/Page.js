@@ -8,8 +8,8 @@ export const Page = () => {
   const [beatdowns, setBeatdowns] = useState([]);
   const [beatdownTotal, setBeatdownTotal] = useState();
 
-  const handleAddBeatdownCount = (beatDownCount) => {
-    setBeatdownTotal(beatDownCount);
+  const handleAddBeatdownCount = (beatdownTotal) => {
+    setBeatdownTotal(beatdownTotal);
     console.log("page count", beatdownTotal);
   };
 

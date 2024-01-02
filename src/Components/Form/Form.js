@@ -28,7 +28,8 @@ export const Form = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (formError.dateError !== "" && !formError.aoError !== "") {
+    if (formError.dateError === "" && formError.aoError === "") {
+      console.log("made it here");
       props.onAddBeatdown(beatdown);
       setBeatdownCount(beatdownCount + 1);
       props.onAddBeatdownCount(beatdownCount);
@@ -63,8 +64,12 @@ export const Form = (props) => {
     }));
   };
 
-  const handleSelectChange = (selectedOption) => {
-    setLedWorkout(selectedOption ? selectedOption.value : "");
+  // const handleSelectChange = (selectedOption) => {
+  //   setLedWorkout(selectedOption ? selectedOption.value : "");
+  // };
+
+  const handleSelectChange = (e) => {
+    setLedWorkout(e.target.value);
   };
 
   const handleAoChange = (selectedAo) => {

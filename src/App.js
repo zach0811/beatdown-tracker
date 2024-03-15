@@ -1,8 +1,10 @@
-import { Page } from "./Components/Page/Page";
+// import { Page } from "./Components/Page/Page";
 
 import Register from "./user/Register";
 import Login from "./user/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QSheet } from "./Components/QSheet/QSheet";
+import SiteInformationComponent from "./Components/AreaInfo/AreaInfo";
 
 const router = createBrowserRouter([
   {
@@ -13,9 +15,13 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  // {
+  //   path: "/dashboard",
+  //   element: <Page />,
+  // },
   {
     path: "/dashboard",
-    element: <Page />,
+    element: <SiteInformationComponent />,
   },
 ]);
 

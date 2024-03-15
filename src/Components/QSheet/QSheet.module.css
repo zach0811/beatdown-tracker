@@ -1,0 +1,38 @@
+
+  
+  
+  
+  
+.qsheet {
+    padding: 1rem;
+    max-width: 100%;
+    /* margin: 2rem auto; */
+    border-radius: 4px;
+    background: linear-gradient(180deg, #307e6c, #2b996d);
+    max-height: 300px;
+    overflow: hidden; /* Ensure the container clips overflow */
+  }
+  
+  input {
+    width: 150px;
+  }
+  
+  .headerContainer {
+    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    background: #307e6c;
+    margin-bottom: 10px;
+  }
+
+  
+  .tableContainer {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 260px; /* Adjust the height of the table body */
+  }
+  
+  .tableContainer table {
+    width: 100%; /* Ensure the table fills its container */
+  }
+  
+  
+  
+  

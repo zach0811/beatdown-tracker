@@ -7,7 +7,7 @@ export const Table = (props) => {
     props.onDeleteBeatdown();
   };
   return (
-    <div>
+    <div className={classes.scrollableTable}>
       <table className={classes.result}>
         <thead>
           <tr>
@@ -26,7 +26,9 @@ export const Table = (props) => {
               <td>{beatdown?.location?.label}</td>
               <td>{beatdown?.ledWorkout.charAt(0).toUpperCase()}</td>
               <td>
-                <button onClick={handleDelete}>Delete</button>
+                <button className={classes.button} onClick={handleDelete}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

@@ -5,6 +5,7 @@ import Login from "./user/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QSheet } from "./Components/QSheet/QSheet";
 import SiteInformationComponent from "./Components/AreaInfo/AreaInfo";
+import Layout from "./layout";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   // },
   {
     path: "/dashboard",
-    element: <SiteInformationComponent />,
+    element: <Layout />,
   },
 ]);
 

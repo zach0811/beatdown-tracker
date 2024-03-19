@@ -4,6 +4,7 @@ import classes from "./AreaInfo.module.css";
 const siteInfo = {
   site: "Rubicon",
   meetingDays: [2, 4],
+  days: ["Tuesday", "Thursday"],
   time: "5:30 AM",
   location: "Wills Park",
   siteQ: "Avis",
@@ -18,7 +19,7 @@ export const SiteInformationComponent = () => {
     <div className={classes.areaInfo}>
       <h2>{siteInfo.site}</h2>
       <p>
-        <strong>Meeting Days:</strong> {siteInfo.meetingDays.join(", ")}
+        <strong>Meeting Days:</strong> {siteInfo.days.join(", ")}
       </p>
       <p>
         <strong>Time:</strong> {siteInfo.time}

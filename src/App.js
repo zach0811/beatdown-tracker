@@ -1,7 +1,7 @@
 // import { Page } from "./Components/Page/Page";
 
 import Register from "./user/Register";
-import Login from "./user/Login";
+import { Login } from "./user/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QSheet } from "./Components/QSheet/QSheet";
 import SiteInformationComponent from "./Components/AreaInfo/AreaInfo";
@@ -9,7 +9,7 @@ import Layout from "./layout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -23,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Layout />,
+  },
+  {
+    path: "/qsheet",
+    element: <QSheet />,
   },
 ]);
 

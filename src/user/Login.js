@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "../api/axios";
 const LOGIN_URL = "/auth";
 
-const Login = () => {
+export const Login = () => {
   const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
@@ -114,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+

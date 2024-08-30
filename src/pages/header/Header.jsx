@@ -46,7 +46,7 @@ export default function Header({ issidebar, changeSidebar, islogin }) {
               to={islogin ? "/home" : "/"}
               style={{ textDecoration: "none", color: "white" }}
             >
-              React Sidebar
+              F3 Dashboard
             </Link>
           </Typography>
           {islogin ? (

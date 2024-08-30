@@ -2,13 +2,13 @@ import { Home, Dashboard, ExitToApp } from "@material-ui/icons";
 
 export const sidemenu = [
   {
-    name: "Home",
-    path: "/home",
+    name: "Dashboard",
+    path: "/dashboard",
     icon: <Home />,
   },
   {
     name: "Q Sheet",
-    path: "/dashboard",
+    path: "/qsheet",
     icon: <Dashboard />,
   },
   {
@@ -17,13 +17,13 @@ export const sidemenu = [
     icon: <ExitToApp />,
   },
   {
-    name: "Logout",
+    name: "Backblast Form",
     path: "/logout",
     icon: <ExitToApp />,
   },
   {
     name: "Logout",
-    path: "/logout",
+    path: "/login",
     icon: <ExitToApp />,
   },
 ];
